@@ -25,7 +25,8 @@ const styles = {
   global: props => ({
     body: {
       color: mode('gray.800', 'whiteAlpha.900')(props),
-      bg: mode('zinc.100', '#252525')(props)
+      bg: mode('zinc.100', '#252525')(props),
+      outline: mode('main.700', 'main.300')(props)
     }
   })
 }
@@ -35,4 +36,9 @@ const config = {
   useSystemColorMode: true
 }
 
-export const theme = extendTheme({ colors, config, styles, semanticTokens })
+export const theme = extendTheme({
+  colors,
+  config,
+  styles,
+  semanticTokens
+})

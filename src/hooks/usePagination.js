@@ -3,15 +3,16 @@ import axios from 'axios'
 
 const usePagination = (url, succes = res => res.data) => {
   const ITEM_X_PAGE = 50
+
   const [response, setResponse] = useState([])
   const [error, setError] = useState('')
   const [loading, setloading] = useState(true)
-  const [actualPage, setActualPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const fetchData = () => {
     axios
       .get(
-        `https://api.mercadolibre.com/sites/MLA/search?q=anime&category=MLA1430&offset=${(actualPage -
+        `https://api.mercadolibre.com/sites/MLA/search?q=anime&category=MLA1430&offset=${(currentPage -
           1) *
           ITEM_X_PAGE}`
       )
@@ -27,19 +28,20 @@ const usePagination = (url, succes = res => res.data) => {
   }
 
   const nextPage = () => {
-    setActualPage(ap => ap + 1)
+    setCurrentPage(ap => ap + 1)
   }
   const PrevPage = () => {
-    actualPage > 1 && setActualPage(ap => ap - 1)
+    currentPage > 1 && setCurrentPage(ap => ap - 1)
   }
-  const gotoPage = pageNumber => {
-    setActualPage(pageNumber)
+  function jump (page) {
+    const pageNumber = Math.max(1, page)
+    setCurrentPage(currentPage => Math.min(pageNumber, 50))
   }
   useEffect(() => {
     fetchData()
-  }, [actualPage])
+  }, [currentPage])
 
-  return { response, error, loading, nextPage, PrevPage, gotoPage }
+  return { response, error, loading, nextPage, PrevPage, jump }
 }
 
 export default usePagination

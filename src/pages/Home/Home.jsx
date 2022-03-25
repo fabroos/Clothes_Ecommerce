@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom'
 import React from 'react'
 
-import { Text } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
+
+import HeroImg from '../../assets/Hero.png'
+import { Header } from '../../components/Header/Header'
+import OrderBy from '../../components/OrderBy/OrderBy'
 
 export function Home () {
   return (
-    <div>
-      <Text color={'main.200'} fontWeight={'Bold'} fontSize={'5xl'}></Text>
-
-      <Link to='/detail/1'>Nashe</Link>
-    </div>
+    <>
+      <Header />
+      <Box as='section' h='60vh'>
+        <Image src={HeroImg} objectFit='cover' w={'full'} h={'full'} />
+      </Box>
+      <OrderBy />
+    </>
   )
 }
