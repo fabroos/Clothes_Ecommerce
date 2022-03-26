@@ -18,7 +18,7 @@ import { Header } from '../../components/Header/Header'
 import { CartContext } from '../../contexts/CartContext'
 import { useAsync } from '../../hooks/useAsync'
 import { getSingleProduct } from '../../services/getSingleProduct'
-import { ItemDetailPlaceholder } from './Components/ItemDetailPlaceholder/Detail'
+import { ItemDetailPlaceholder } from './Components/ItemDetailPlaceholder/ItemDetailPlaceholder'
 
 export function Detail () {
   const [quantity, setQuantity] = useState(1)
