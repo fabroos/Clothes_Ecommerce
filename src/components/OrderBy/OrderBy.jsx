@@ -1,20 +1,14 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import React from 'react'
+import CustomTab from './CustomTab'
 
 export default function OrderBy () {
-  const tabSelected = { color: 'main.500', borderColor: 'main.500' }
   return (
-    <Tabs>
+    <Tabs p={12}>
       <TabList display='flex' justifyContent='center' color='main.500'>
-        <Tab _selected={tabSelected} px={4} boxShadow='none'>
-          One
-        </Tab>
-        <Tab _selected={tabSelected} px={4}>
-          Two
-        </Tab>
-        <Tab _selected={tabSelected} px={4}>
-          Three
-        </Tab>
+        <CustomTab>One</CustomTab>
+        <CustomTab>Two</CustomTab>
+        <CustomTab>Three</CustomTab>
       </TabList>
 
       <TabPanels>

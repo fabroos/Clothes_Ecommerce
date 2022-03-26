@@ -12,12 +12,16 @@ const colors = {
     700: '#B2002C',
     800: '#8D0014',
     900: '#690000'
+  },
+  background: {
+    500: '#25252'
   }
 }
 
 const semanticTokens = {
   colors: {
-    error: 'red.400'
+    error: 'red.400',
+    background: 'background.500'
   }
 }
 
