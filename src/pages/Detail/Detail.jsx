@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import QuantiyAdd from '../../../../../fabrizio-signoretta-Ecommerce/src/Components/Details/QuantiyAdd'
+import { QuantiyAdd } from '../../../../../fabrizio-signoretta-Ecommerce/src/Components/Details/QuantiyAdd'
 import { adaptSingleProduct } from '../../adapters/adaptSingleProduct'
 import { Header } from '../../components/Header/Header'
 import { CartContext } from '../../contexts/CartContext'

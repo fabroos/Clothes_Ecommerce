@@ -1,7 +1,7 @@
 import { Box, Button, Input } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-export default function QuantiyAdd ({ quantity, setQuantity, stock }) {
+export function QuantiyAdd ({ quantity, setQuantity, stock }) {
   const [quantityErr, setQantityErr] = useState(false)
   function handleMore () {
     if (quantity < stock) {
