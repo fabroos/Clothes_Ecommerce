@@ -1,5 +1,9 @@
-import axios from 'axios'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import { app } from '../firebase/config'
 
 export const getSingleProduct = id => {
-  return axios.get(`https://api.mercadolibre.com/items/${id}`)
+  const db = getFirestore(app)
+  const queryDoc = doc(db, 'productos', id)
+
+  return getDoc(queryDoc)
 }

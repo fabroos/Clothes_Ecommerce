@@ -1,10 +1,8 @@
 export const adaptSingleProduct = res => {
-  const p = res.data
+  const p = res
+  console.log(p)
   return {
     id: p.id,
-    title: p.title,
-    price: p.price,
-    stock: p.available_quantity,
-    img: p.pictures[0].url
+    ...p.data()
   }
 }

@@ -1,144 +1,119 @@
 import {
+  Badge,
   Box,
   Button,
+  ButtonGroup,
+  Center,
   Container,
+  Divider,
   Flex,
   Heading,
+  HStack,
   Image,
-  SimpleGrid,
-  Stack,
+  Spinner,
   Text,
-  useColorModeValue
+  useToast,
+  VStack
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { QuantiyAdd } from './Components/QuantityBtn/QuantityBtn'
 import { adaptSingleProduct } from '../../adapters/adaptSingleProduct'
+import { Count } from '../../components/Count/Count'
 import { Header } from '../../components/Header/Header'
 import { CartContext } from '../../contexts/CartContext'
 import { useAsync } from '../../hooks/useAsync'
 import { getSingleProduct } from '../../services/getSingleProduct'
-import { ItemDetailPlaceholder } from './Components/ItemDetailPlaceholder/ItemDetailPlaceholder'
 
 export function Detail () {
-  const [quantity, setQuantity] = useState(1)
-  const { addProductToCart, cart } = useContext(CartContext)
   const { id } = useParams()
-  const req = getSingleProduct(id)
-  const { response } = useAsync(req, adaptSingleProduct)
-  const [buy, setBuy] = useState(false)
+  const { response, loading } = useAsync(
+    getSingleProduct(id),
+    adaptSingleProduct
+  )
+  const [count, setCount] = useState(1)
+  const { addProductToCart, error, cart } = useContext(CartContext)
+  const toast = useToast()
+  console.log(cart)
   const handleAdd = () => {
-    addProductToCart({ ...response, quantity })
-    setBuy(true)
+    addProductToCart({ quantity: count, ...response })
+    toast({
+      title: error
+        ? '¡No hay suficiente stock!'
+        : 'Producto agregado con exito',
+      description: error
+        ? 'ten cuidado los items que llevas'
+        : `¡${count} producto${count > 1 ? 's' : ''} agregado${
+            count > 1 ? 's' : ''
+          } con exito!`,
+      status: error ? 'error' : 'success',
+      duration: 3000,
+      isClosable: true
+    })
   }
-  console.log(cart, quantity)
   return (
     <>
       <Header />
-      <Container maxW={'7xl'}>
-        <SimpleGrid
-          columns={{ base: 1, lg: 2 }}
-          spacing={{ base: 8, md: 10 }}
-          py={{ base: 18, md: 24 }}
-        >
-          <Flex>
-            <Image
-              rounded={'md'}
-              alt={'product image'}
-              src={response.img}
-              fit={'cover'}
-              align={'center'}
-              w={'100%'}
-              h={{ base: '100%', sm: '400px', lg: '500px' }}
-            />
-          </Flex>
-          <Stack spacing={{ base: 6, md: 10 }}>
-            <Box as={'header'}>
-              <Heading
-                lineHeight={1.1}
-                fontWeight={600}
-                fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}
-              ></Heading>
-              <Text
-                color={useColorModeValue('gray.900', 'gray.400')}
-                fontWeight={300}
-                fontSize={'2xl'}
-              ></Text>
-            </Box>
-            <ItemDetailPlaceholder stock={response.stock} />
-            <QuantiyAdd
-              quantity={quantity}
-              setQuantity={setQuantity}
-              stock={response.stock}
-            />
-            {!buy && (
-              <Button
-                rounded={'none'}
-                w={'full'}
-                mt={8}
-                py={'7'}
-                bg={'main.500'}
-                color={useColorModeValue('white', 'gray.900')}
-                textTransform={'uppercase'}
-                _hover={{
-                  transform: 'translateY(2px)',
-                  boxShadow: 'lg'
-                }}
-                onClick={handleAdd}
-              >
-                Add to cart
-              </Button>
-            )}
-            {buy && (
-              <Flex gap={10}>
-                <Button
-                  as={Link}
-                  borderRadius={10}
-                  to='/products'
-                  rounded={'none'}
-                  w={'full'}
-                  mt={8}
-                  py={'7'}
-                  textTransform={'uppercase'}
-                  _hover={{
-                    transform: 'translateY(2px)',
-                    boxShadow: 'lg'
-                  }}
-                  onClick={handleAdd}
-                >
-                  Continue buying
-                </Button>
-                <Button
-                  borderRadius={'md'}
-                  as={Link}
-                  to='/cart'
-                  rounded={'none'}
-                  w={'full'}
-                  mt={8}
-                  py={'7'}
-                  bg='main.500'
-                  color={useColorModeValue('white', 'gray.900')}
-                  textTransform={'uppercase'}
-                  _hover={{
-                    transform: 'translateY(2px)',
-                    boxShadow: 'lg'
-                  }}
-                  onClick={handleAdd}
-                >
-                  Go to cart
-                </Button>
-              </Flex>
-            )}
-
-            <Stack
-              direction='row'
-              alignItems='center'
-              justifyContent={'center'}
+      <Container maxW='container.md' my={10}>
+        {response.id && (
+          <VStack>
+            <Flex
+              gap={5}
+              direction={['column', 'column', 'row']}
+              justify='center'
+              align='start'
             >
-              <Text>2-3 business days delivery</Text>
-            </Stack>
-          </Stack>
-        </SimpleGrid>
+              <Box maxW={'300px'} minW='250px' m='auto'>
+                <Image src={response.imagen} />
+              </Box>
+              <VStack justify='flex-start' flex='1' align='start'>
+                <Heading>{response.title}</Heading>
+                <HStack spacing={3}>
+                  <Link to={`/productos/${response.manga}`}>
+                    <Badge
+                      colorScheme='gray'
+                      transitionDuration='.15s'
+                      _hover={{ bg: 'main.500', color: 'white' }}
+                    >
+                      {response.manga}
+                    </Badge>
+                  </Link>
+                  {response.stock < 4 && (
+                    <Badge colorScheme='yellow'>Ultimas unidades</Badge>
+                  )}
+                </HStack>
+                <Divider />
+                <Text>Stock: {response.stock}</Text>
+                <ButtonGroup alignSelf='center' w='60%' minW='sm' px={5}>
+                  <Button w='50%' colorScheme='main' onClick={handleAdd}>
+                    Add To Cart
+                  </Button>
+                  <Count
+                    count={count}
+                    setCount={setCount}
+                    max={response.stock}
+                  />
+                </ButtonGroup>
+              </VStack>
+            </Flex>
+            <Box alignSelf='self-start'>
+              <a
+                href={`https://isbnsearch.org/isbn/${response.ISBN}`}
+                target='_BLANK'
+                rel='noreferrer'
+              >
+                <HStack bg='gray.200' py={1} px={2} borderRadius={5}>
+                  <Text fontWeight='semibold'>ISBN</Text>
+                  <Text color='gray.500'>{response.ISBN}</Text>
+                </HStack>
+              </a>
+            </Box>
+          </VStack>
+        )}
+        {loading && (
+          <Center>
+            <Spinner size='lg' colorScheme='main' />
+          </Center>
+        )}
       </Container>
     </>
   )

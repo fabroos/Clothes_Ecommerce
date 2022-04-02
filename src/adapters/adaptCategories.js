@@ -1,4 +1,4 @@
-export const adaptProduct = res => {
+export const adaptCategories = res => {
   const products = res.docs.map(p => {
     return {
       id: p.id,

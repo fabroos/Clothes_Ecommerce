@@ -1,5 +1,4 @@
 import { extendTheme } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
 
 const colors = {
   main: {
@@ -18,31 +17,6 @@ const colors = {
   }
 }
 
-const semanticTokens = {
-  colors: {
-    error: 'red.400',
-    background: 'background.500'
-  }
-}
-
-const styles = {
-  global: props => ({
-    body: {
-      color: mode('gray.800', 'whiteAlpha.900')(props),
-      bg: mode('zinc.100', '#252525')(props),
-      outline: mode('main.700', 'main.300')(props)
-    }
-  })
-}
-
-const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: true
-}
-
 export const theme = extendTheme({
-  colors,
-  config,
-  styles,
-  semanticTokens
+  colors
 })

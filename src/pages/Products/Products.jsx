@@ -1,54 +1,36 @@
 import {
   Center,
   Container,
-  Grid,
-  GridItem,
-  Show,
+  Heading,
   SimpleGrid,
-  Text
+  Skeleton
 } from '@chakra-ui/react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import { adaptProduct } from '../../adapters/adaptProducts'
-import { Header } from '../../components/Header/Header'
 
-import { ProductCard } from '../../components/ProductItem/ProductCard'
+import { Header } from '../../components/Header/Header'
+import { ProductCard } from '../../components/ProductCard/ProductCard'
 import { useAsync } from '../../hooks/useAsync'
 import { getProducts } from '../../services/getProducts'
-import Categories from './components/Categories/Categories'
 
 export function Products () {
-  const { id } = useParams()
-  const req = getProducts()
-  const { loading, response, error } = useAsync(req, adaptProduct)
-  console.log({ loading, response, error })
+  const { response, loading } = useAsync(getProducts(), adaptProduct)
   return (
     <>
       <Header />
-      <Container px={'10'} maxW={'full'}>
-        <Center m={5}>
-          <Text fontSize='3xl' fontWeight='bold'>
-            {id || 'All Categories'}
-          </Text>
-        </Center>
-
-        <Grid h='80vh' templateColumns='repeat(8, 1fr)'>
-          <Show above='md'>
-            <Categories colSpan={{ md: 3, lg: 2 }} />
-          </Show>
-          <GridItem p='4' colSpan={{ base: 8, md: 5, lg: 6 }}>
-            <SimpleGrid
-              columns={[1, 1, 1, 2, 3]}
-              spacing={10}
-              justifyContent='center'
-              alignItems={'center'}
-            >
-              {response.map(p => (
-                <ProductCard key={p.id} {...p} />
-              ))}
-            </SimpleGrid>
-          </GridItem>
-        </Grid>
+      <Center>
+        <Heading>Todos los productos</Heading>
+      </Center>
+      <Container maxW='container.md' my={10}>
+        <SimpleGrid minChildWidth={'120px'} spacing='40px' w='full'>
+          {loading &&
+            Array(18).map((a, i) => (
+              <Skeleton w='full' h='full' minH={70} key={i} />
+            ))}
+          {response.map(prod => (
+            <ProductCard key={prod.id} {...prod} />
+          ))}
+        </SimpleGrid>
       </Container>
     </>
   )

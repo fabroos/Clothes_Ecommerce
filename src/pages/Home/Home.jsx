@@ -1,55 +1,33 @@
+import { Container, Flex, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
-
-import { Box, Container, Flex, Image, Text } from '@chakra-ui/react'
-
-import HeroImg from '../../assets/Hero.jpg'
-import ProductsImg from '../../assets/matheus-ferrero.jpg'
+import { adaptCategories } from '../../adapters/adaptCategories'
 import { Header } from '../../components/Header/Header'
-
-import { Link } from 'react-router-dom'
-
+import { LgCategorie } from '../../components/LgCategorie/LgCategorie'
+import { SliderImg } from '../../components/slider/Slider'
+import { useAsync } from '../../hooks/useAsync'
+import { getCategories } from '../../services/getCategories'
+const news = [
+  {
+    img:
+      'https://tierragamer.com/wp-content/uploads/2022/02/cosplay-kimetsu-no-yaiba-tengen-uzui-esposas-1.jpg',
+    title: 'El nuevo tomo de kimetsu llego',
+    id: '1313ekjkqd31n23kn'
+  }
+]
 export function Home () {
+  const { response: categories } = useAsync(getCategories(), adaptCategories)
+  console.log(categories)
   return (
     <>
       <Header />
-      <Box as='section' h='50vh'>
-        <Image src={HeroImg} objectFit='cover' w={'full'} h={'full'} />
-      </Box>
-
-      <Container py={'10'}>
-        <Text my={10} fontSize={23}>
-          Himitsu is an online shop for anime lovers
-        </Text>
-        <Text fontSize={32} textAlign='center' color='main.500'>
-          ...Proximamente productos destacados
-        </Text>
+      <SliderImg {...news[0]} />
+      <Container maxW='container.md' mt='50px'>
+        <SimpleGrid minChildWidth='220px' spacing='20px'>
+          {categories.map(cat => (
+            <LgCategorie key={cat.id} name={cat.nombre} img={cat.imagen} />
+          ))}
+        </SimpleGrid>
       </Container>
-
-      <Flex
-        as='section'
-        h='50vh'
-        align='center'
-        justify='center'
-        bgImage={ProductsImg}
-        bgRepeat={'no-repeat'}
-        bgPos='0 center'
-        bgSize='cover'
-      >
-        <Text
-          as={Link}
-          to={'/products'}
-          fontWeight='bold'
-          fontSize='3xl'
-          textShadow='2xl'
-          _hover={{
-            underline: 'none',
-            transform: 'scale(1.1)'
-          }}
-          _after={{ content: '"→"' }}
-        >
-          All Products
-        </Text>
-      </Flex>
     </>
   )
 }

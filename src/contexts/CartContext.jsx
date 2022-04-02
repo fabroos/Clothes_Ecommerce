@@ -3,39 +3,52 @@ import React, { createContext, useState } from 'react'
 export const CartContext = createContext(null)
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
-  const getItemIndex = id => {
-    return cart.findIndex(item => item.id === id)
-  }
+  const [cart, setCart] = useState(new Map())
+  const [error, setError] = useState(false)
+
   const addProductToCart = product => {
-    const newItemIndex = getItemIndex(product.id)
-    const newCart = [...cart]
-    if (newItemIndex < 0) {
-      newCart.push({ ...product })
-    } else {
-      const newItem = {
-        ...newCart[newItemIndex]
+    const newCart = new Map(cart)
+    setError(false)
+    if (newCart.has(product.id)) {
+      const item = newCart.get(product.id)
+      if (item.quantity + product.quantity > product.stock) {
+        return setError(true)
       }
-      newItem.quantity += product.quantity
-      newCart[newItemIndex] = newItem
+      item.quantity += product.quantity
+    } else {
+      newCart.set(product.id, product)
     }
     setCart(newCart)
   }
+
   const removeItem = id => {
-    const newItemIndex = getItemIndex(id)
-    const newCart = [...cart]
-    newCart.splice(newItemIndex, 1)
+    const newCart = new Map(cart)
+    if (newCart.has(id)) newCart.delete(id)
     setCart(newCart)
   }
   const clear = () => {
-    setCart([])
+    setCart(new Map())
   }
   const isInCart = id => {
-    return getItemIndex(id) >= 0
+    return cart.has(id)
+  }
+
+  const cartQuantity = () => {
+    let cantidad = 0
+    cart.forEach(item => (cantidad += item?.quantity || 0))
+    return cantidad
   }
   return (
     <CartContext.Provider
-      value={{ addProductToCart, removeItem, clear, isInCart, cart }}
+      value={{
+        addProductToCart,
+        removeItem,
+        clear,
+        isInCart,
+        cart,
+        error,
+        cartQuantity
+      }}
     >
       {children}
     </CartContext.Provider>
