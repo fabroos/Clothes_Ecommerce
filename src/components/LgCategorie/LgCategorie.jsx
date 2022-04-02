@@ -2,9 +2,9 @@ import { Box, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export function LgCategorie ({ name, img }) {
+export function LgCategorie ({ name, img, redirect }) {
   return (
-    <Link to={`/categorias/${name}`}>
+    <Link to={`/categorias/${redirect}`}>
       <VStack h='full' w='full' maxW='320px' m='auto'>
         <Box
           overflow='hidden'

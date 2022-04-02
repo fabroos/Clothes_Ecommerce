@@ -24,7 +24,12 @@ export function Home () {
       <Container maxW='container.md' mt='50px'>
         <SimpleGrid minChildWidth='220px' spacing='20px'>
           {categories.map(cat => (
-            <LgCategorie key={cat.id} name={cat.nombre} img={cat.imagen} />
+            <LgCategorie
+              key={cat.id}
+              name={cat.nombre}
+              img={cat.imagen}
+              redirect={cat.redirect}
+            />
           ))}
         </SimpleGrid>
       </Container>
