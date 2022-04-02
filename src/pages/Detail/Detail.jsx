@@ -36,19 +36,6 @@ export function Detail () {
   console.log(cart)
   const handleAdd = () => {
     addProductToCart({ quantity: count, ...response })
-    toast({
-      title: error
-        ? '¡No hay suficiente stock!'
-        : 'Producto agregado con exito',
-      description: error
-        ? 'ten cuidado los items que llevas'
-        : `¡${count} producto${count > 1 ? 's' : ''} agregado${
-            count > 1 ? 's' : ''
-          } con exito!`,
-      status: error ? 'error' : 'success',
-      duration: 3000,
-      isClosable: true
-    })
   }
   return (
     <>
@@ -96,16 +83,18 @@ export function Detail () {
               </VStack>
             </Flex>
             <Box alignSelf='self-start'>
-              <a
-                href={`https://isbnsearch.org/isbn/${response.ISBN}`}
-                target='_BLANK'
-                rel='noreferrer'
-              >
-                <HStack bg='gray.200' py={1} px={2} borderRadius={5}>
-                  <Text fontWeight='semibold'>ISBN</Text>
-                  <Text color='gray.500'>{response.ISBN}</Text>
-                </HStack>
-              </a>
+              {response.isbn && (
+                <a
+                  href={`https://isbnsearch.org/isbn/${response.ISBN}`}
+                  target='_BLANK'
+                  rel='noreferrer'
+                >
+                  <HStack bg='gray.200' py={1} px={2} borderRadius={5}>
+                    <Text fontWeight='semibold'>ISBN</Text>
+                    <Text color='gray.500'>{response.ISBN}</Text>
+                  </HStack>
+                </a>
+              )}
             </Box>
           </VStack>
         )}

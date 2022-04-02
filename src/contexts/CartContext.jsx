@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react'
 import React, { createContext, useState } from 'react'
 
 export const CartContext = createContext(null)
@@ -5,20 +6,35 @@ export const CartContext = createContext(null)
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(new Map())
   const [error, setError] = useState(false)
-
+  const toast = useToast()
   const addProductToCart = product => {
     const newCart = new Map(cart)
     setError(false)
     if (newCart.has(product.id)) {
       const item = newCart.get(product.id)
       if (item.quantity + product.quantity > product.stock) {
-        return setError(true)
+        return toast({
+          title: '¡No hay suficiente stock!',
+          description: 'ten cuidado los items que llevas',
+          status: 'error',
+          duration: 3000,
+          isClosable: true
+        })
       }
       item.quantity += product.quantity
     } else {
       newCart.set(product.id, product)
     }
     setCart(newCart)
+    toast({
+      title: 'Producto agregado con exito',
+      description: `¡${product.quantity} producto${
+        product.quantity > 1 ? 's' : ''
+      } agregado${product.quantity > 1 ? 's' : ''} con exito!`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true
+    })
   }
 
   const removeItem = id => {

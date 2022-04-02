@@ -42,11 +42,14 @@ export function Products () {
         <Heading>Todos los productos</Heading>
       </Center>
       <Container maxW='container.md' my={10}>
-        <SimpleGrid minChildWidth={'120px'} spacing='40px' w='full'>
+        <SimpleGrid minChildWidth={'180px'} spacing='40px' w='full'>
           {loading &&
-            Array(18).map((a, i) => (
-              <Skeleton w='full' h='full' minH={70} key={i} />
-            ))}
+            Array(18)
+              .fill(' ')
+              .map((a, i) => <Skeleton w='218px' h='409px' key={i} />)}
+          {items.map(prod => (
+            <ProductCard key={prod.id} {...prod} />
+          ))}
           {items.map(prod => (
             <ProductCard key={prod.id} {...prod} />
           ))}
