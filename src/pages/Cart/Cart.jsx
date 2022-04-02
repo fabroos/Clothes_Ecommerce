@@ -18,8 +18,9 @@ import { CartContext } from '../../contexts/CartContext'
 import { Link } from 'react-router-dom'
 import { HiOutlineX } from 'react-icons/hi'
 export function Cart () {
-  const { cart, removeItem } = useContext(CartContext)
+  const { cart, removeItem, totalPrice } = useContext(CartContext)
   console.log(cart.size, cart.values())
+  const total = totalPrice()
   return (
     <>
       <Header />
@@ -87,6 +88,14 @@ export function Cart () {
                 </Text>
               </HStack>
             ))}
+            <VStack align='end' w='full'>
+              <HStack fontWeight='semibold' justify='flex-end'>
+                <Text>Total $</Text>
+                <Text color='main.500' fontSize='2xl'>
+                  {total}
+                </Text>
+              </HStack>
+            </VStack>
           </VStack>
         </Container>
       )}

@@ -38,6 +38,11 @@ export const CartProvider = ({ children }) => {
     cart.forEach(item => (cantidad += item?.quantity || 0))
     return cantidad
   }
+  const totalPrice = () => {
+    let total = 0
+    cart.forEach(item => (total += item?.quantity * item?.price || 0))
+    return total
+  }
   return (
     <CartContext.Provider
       value={{
@@ -47,7 +52,8 @@ export const CartProvider = ({ children }) => {
         isInCart,
         cart,
         error,
-        cartQuantity
+        cartQuantity,
+        totalPrice
       }}
     >
       {children}
