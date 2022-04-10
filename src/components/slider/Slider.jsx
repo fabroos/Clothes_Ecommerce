@@ -20,8 +20,6 @@ import { adaptCategories } from '../../adapters/adaptCategories'
 export function SliderImg () {
   const [value, setValue] = useState('1')
   const { response: notice } = useAsync(getNotices(), adaptCategories)
-  console.log(notice[value])
-  console.log(value)
   return (
     <>
       {' '}

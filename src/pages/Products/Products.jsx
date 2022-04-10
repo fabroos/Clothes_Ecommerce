@@ -1,9 +1,11 @@
 import {
+  Box,
   Center,
   Container,
   Heading,
   SimpleGrid,
-  Skeleton
+  Skeleton,
+  SkeletonText
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -18,9 +20,7 @@ export function Products () {
   const { response, loading } = useAsync(getProducts(), adaptProduct)
   const { categoria, search } = useParams()
   const [items, setItems] = useState([])
-  console.log(categoria, search)
   useEffect(() => {
-    console.log(response)
     if (search) {
       setItems(
         response.filter(
@@ -28,11 +28,9 @@ export function Products () {
         )
       )
     } else if (categoria) {
-      console.log(response)
       setItems(response.filter(item => item?.categoria === categoria))
     } else {
       setItems(response)
-      console.log(items)
     }
   }, [categoria, search, response])
   return (
@@ -46,7 +44,12 @@ export function Products () {
           {loading &&
             Array(18)
               .fill(' ')
-              .map((a, i) => <Skeleton w='218px' h='409px' key={i} />)}
+              .map((a, i) => (
+                <Box key={i} w='full'>
+                  <Skeleton maxW='220px' w='full' h='330px' mb={4} />
+                  <SkeletonText />
+                </Box>
+              ))}
           {items.map(prod => (
             <ProductCard key={prod.id} {...prod} />
           ))}

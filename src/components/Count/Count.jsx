@@ -27,6 +27,7 @@ export function Count ({ count, setCount, max, min = 1 }) {
         borderRadius='none'
         textAlign='center'
         min='1'
+        readOnly
         value={count}
       />
       <Button onClick={handleAdd}>+</Button>

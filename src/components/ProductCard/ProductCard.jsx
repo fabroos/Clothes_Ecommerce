@@ -1,7 +1,7 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Image, Skeleton, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import imageFallback from '../../assets/demon-1.jpeg'
+
 export function ProductCard ({ imagen, title, price, id }) {
   return (
     <Link to={`/detalle/${id}`}>
@@ -16,8 +16,12 @@ export function ProductCard ({ imagen, title, price, id }) {
         _hover={{ color: 'main.500' }}
         justify='space-between'
       >
-        <Box h='full' display={'flex'}>
-          <Image fit='cover' src={imagen} fallbackSrc={imageFallback} />
+        <Box h='full' display={'flex'} maxH={'330px'}>
+          <Image
+            fit='cover'
+            src={imagen}
+            fallback={<Skeleton h='330px' w='220px' />}
+          />
         </Box>
         <VStack>
           <Text align='center' lineHeight='1.1'>

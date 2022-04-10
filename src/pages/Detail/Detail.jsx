@@ -12,7 +12,6 @@ import {
   Image,
   Spinner,
   Text,
-  useToast,
   VStack
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
@@ -31,9 +30,7 @@ export function Detail () {
     adaptSingleProduct
   )
   const [count, setCount] = useState(1)
-  const { addProductToCart, error, cart } = useContext(CartContext)
-  const toast = useToast()
-  console.log(cart)
+  const { addProductToCart } = useContext(CartContext)
   const handleAdd = () => {
     addProductToCart({ quantity: count, ...response })
   }
