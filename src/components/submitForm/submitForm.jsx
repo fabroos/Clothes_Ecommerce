@@ -53,9 +53,9 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
   function handleBuy () {
     if (!error) {
       const order = {
-        order: Array.from(cart.values()),
+        items: Array.from(cart.values()),
         amount: totalPrice(),
-        ...userInfo
+        buyer: userInfo
       }
       setLoading(true)
       setOrder(order)

@@ -11,6 +11,6 @@ export function setOrder (order) {
   const db = getFirestore(app)
   return addDoc(collection(db, 'orders'), {
     ...order,
-    timestamp: serverTimestamp()
+    date: serverTimestamp()
   })
 }
