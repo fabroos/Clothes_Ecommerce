@@ -1,0 +1,7 @@
+.navlink {
+  border-bottom: 3px solid transparent;
+}
+
+.navlink--active {
+  border-bottom: 3px solid var(--chakra-colors-main-500);
+}

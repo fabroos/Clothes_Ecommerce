@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 
-export const useAsync = (request, adapter, initialState = []) => {
+export const useAsync = (
+  request,
+  adapter,
+  initialState = [],
+  other = res => res
+) => {
   const [response, setResponse] = useState(initialState)
   const [error, setError] = useState('')
   const [loading, setloading] = useState(true)

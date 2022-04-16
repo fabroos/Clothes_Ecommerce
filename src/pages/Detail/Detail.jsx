@@ -52,13 +52,13 @@ export function Detail () {
               <VStack justify='flex-start' flex='1' align='start'>
                 <Heading>{response.title}</Heading>
                 <HStack spacing={3}>
-                  <Link to={`/productos/${response.manga}`}>
+                  <Link to={`/tematica/${response.tematica}`}>
                     <Badge
                       colorScheme='gray'
                       transitionDuration='.15s'
                       _hover={{ bg: 'main.500', color: 'white' }}
                     >
-                      {response.manga}
+                      {response.tematica}
                     </Badge>
                   </Link>
                   {response.stock < 4 && (

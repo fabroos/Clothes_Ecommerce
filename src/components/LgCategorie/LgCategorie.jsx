@@ -1,4 +1,4 @@
-import { Box, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Image, Skeleton, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ export function LgCategorie ({ name, img, redirect }) {
             shadowColor: 'main.500'
           }}
         >
-          <Image src={img} />
+          <Image src={img} fallback={<Skeleton w='full' h='full' />} />
         </Box>
         <Text fontSize='large' fontWeight='semibold'>
           {name}

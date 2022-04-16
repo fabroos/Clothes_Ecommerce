@@ -1,0 +1,20 @@
+##Minium Components
+
+1. Navbar
+2. Catalogo
+3. Detalle del producto                     
+4. Cart Context
+5. Cart Widget
+6. Formulario de compra
+
+##Formato
+
+Link al repositorio + Demo
+
+##Rubricas
+
+-Un buen readme 
+-No Console.logs
+-No piezas de codigo inutilizadas
+-Bien componentizado
+-Sólo usa librerías que aportan valor no lograble de otro modo
