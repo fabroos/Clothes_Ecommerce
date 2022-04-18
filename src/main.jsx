@@ -5,7 +5,7 @@ import App from './App'
 import { CartProvider } from './contexts/CartContext'
 
 import { theme } from './theme'
-// gitmoji for refactor
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>

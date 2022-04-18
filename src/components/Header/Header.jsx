@@ -2,8 +2,9 @@ import React from 'react'
 import { Box, Container, Flex, Image } from '@chakra-ui/react'
 import logo from '../../assets/Brand.svg'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../Navbar/NavBar'
+
 import { CartWidget } from '../CartWidget/CartWidget'
+import { Navbar } from '../Navbar/Navbar'
 
 export function Header () {
   return (
