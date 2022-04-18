@@ -7,6 +7,7 @@ import { Detail } from './pages/Detail/Detail'
 import { Home } from './pages/Home/Home'
 import { Products } from './pages/Products/Products'
 import './generalStyles.css'
+import { Footer } from './components/footer/Footer'
 
 function App () {
   return (
@@ -23,6 +24,7 @@ function App () {
           <Route path='*' element={<Error404 />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </Box>
   )
 }

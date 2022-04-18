@@ -1,6 +1,7 @@
 import { Box, Image, Skeleton, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import priceFormmater from '../../utilities/priceFormmater'
 
 export function ProductCard ({ imagen, title, price, id }) {
   return (
@@ -27,7 +28,7 @@ export function ProductCard ({ imagen, title, price, id }) {
           <Text align='center' lineHeight='1.1'>
             {title}
           </Text>
-          <Text fontWeight='bold'>${price}</Text>
+          <Text fontWeight='bold'>${priceFormmater.format(price)}</Text>
         </VStack>
       </VStack>
     </Link>

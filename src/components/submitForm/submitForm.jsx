@@ -1,11 +1,4 @@
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Button,
   Center,
   Container,
@@ -21,6 +14,7 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import provinces from '../../utilities/provinces'
 import { setOrder } from '../../services/setOrder'
+import { AlertConfirmBuy } from '../AlertConfirmBuy/AlertConfirmBuy'
 
 export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
   const [error, setError] = useState(false)
@@ -34,6 +28,7 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
     codigo_postal: '',
     ciudad: ''
   })
+
   console.log('rerender')
   function handleChange (e) {
     setError(false)
@@ -44,7 +39,10 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
   function handleSubmit (e) {
     e.preventDefault()
     Object.keys(userInfo).forEach(info => {
-      if (userInfo[info].length < 1) setError(true)
+      // verificar que todos los campos esten correctos
+      if (userInfo[info] === '') {
+        return setError(true)
+      }
     })
     if (!error) onOpen()
   }
@@ -63,7 +61,7 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
           clear()
           setLoading(false)
         })
-    }
+    } else onClose()
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -116,12 +114,11 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
               w='50%'
               name='provincia'
               onChange={handleChange}
-              defaultValue={
-                <option value='1' disabled>
-                  Select your option
-                </option>
-              }
+              defaultValue={userInfo.provincia}
             >
+              <option value={''} disabled>
+                Seleccione una provincia
+              </option>
               {provinces.map(prov => (
                 <option key={prov.id} value={prov.iso_id}>
                   {prov.iso_nombre}
@@ -161,35 +158,18 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
             <Button py={6} px={4} colorScheme={'main'} type='submit'>
               Completar pago
             </Button>
-            <AlertDialog
-              motionPreset='slideInBottom'
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
+            <AlertConfirmBuy
+              handleBuy={handleBuy}
               isOpen={isOpen}
-              isCentered
-            >
-              <AlertDialogOverlay />
-
-              <AlertDialogContent>
-                <AlertDialogHeader></AlertDialogHeader>
-                <AlertDialogCloseButton />
-                <AlertDialogBody>
-                  ¿Estas seguro de completar la compra?
-                </AlertDialogBody>
-                <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    No
-                  </Button>
-                  <Button colorScheme='green' ml={3} onClick={handleBuy}>
-                    Yes
-                  </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+              onClose={onClose}
+              cancelRef={cancelRef}
+            />
           </HStack>
           {error && (
             <Center>
-              <Text color='red.500'>Debes llenar todos los campos</Text>
+              <Text fontWeight='bold' color='red.400'>
+                ¡Debes llenar todos los campos!
+              </Text>
             </Center>
           )}
         </VStack>

@@ -3,7 +3,6 @@ import {
   Badge,
   Box,
   Center,
-  Container,
   Flex,
   Heading,
   HStack,
@@ -20,6 +19,24 @@ import { useAsync } from '../../hooks/useAsync'
 import { getNotices } from '../../services/getNotices'
 import { adaptCategories } from '../../adapters/adaptCategories'
 
+function RadioSelection ({ elements, value, setValue }) {
+  return (
+    <RadioGroup onChange={setValue} value={value}>
+      <Stack direction='row'>
+        {elements &&
+          elements.map(element => (
+            <Radio
+              colorScheme='main'
+              value={element?.id}
+              key={element?.id}
+              name='noticeRadio'
+            />
+          ))}
+      </Stack>
+    </RadioGroup>
+  )
+}
+
 export function SliderImg () {
   const [value, setValue] = useState(null)
   const [current, setCurrent] = useState({})
@@ -32,7 +49,7 @@ export function SliderImg () {
   return (
     <>
       {loading && (
-        <Skeleton maxW={'container.md'} m={'auto'} my={5} h='420px'></Skeleton>
+        <Skeleton maxW={'container.md'} m={'auto'} my={5} h='420px' />
       )}
       {!loading && (
         <>
@@ -43,20 +60,17 @@ export function SliderImg () {
             bgPos='center'
             bgSize='cover'
             my={5}
-            // bgImage={`${current?.imagen}`}
             minH='440px'
             pos='relative'
           >
-            <Box>
-              <Image
-                src={current?.imagen}
-                maxW={'full'}
-                h='440px'
-                objectPosition='0'
-                objectFit='cover'
-                fallback={<Skeleton w={'full'} h='440px' />}
-              />
-            </Box>
+            <Image
+              src={current?.imagen}
+              maxW={'full'}
+              h='440px'
+              objectPosition='0'
+              objectFit='cover'
+              fallback={<Skeleton w={'full'} h='440px' />}
+            />
             <HStack
               justify='space-between'
               pos='absolute'
@@ -83,7 +97,7 @@ export function SliderImg () {
                 <Text fontSize='xl' color='gray.200'>
                   Consiguelo ahora aqui!
                 </Text>
-                <Link to={`item/${current?.productId}`}>
+                <Link to={`${current?.type}/${current?.productId}`}>
                   <Text
                     fontSize='xl'
                     bg='blue.500'
@@ -101,19 +115,11 @@ export function SliderImg () {
         </>
       )}
       <Center>
-        <RadioGroup onChange={setValue} value={value}>
-          <Stack direction='row'>
-            {notice &&
-              notice.map(notice => (
-                <Radio
-                  colorScheme='main'
-                  value={notice.id}
-                  key={notice.id}
-                  name='noticeRadio'
-                />
-              ))}
-          </Stack>
-        </RadioGroup>
+        <RadioSelection
+          value={value}
+          setValue={setValue}
+          elements={notice}
+        ></RadioSelection>
       </Center>
     </>
   )

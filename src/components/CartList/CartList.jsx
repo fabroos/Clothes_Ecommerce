@@ -1,6 +1,7 @@
 import { HStack, Text, VStack } from '@chakra-ui/react'
 import { CartItem } from '../CartItem/CartItem'
 import React from 'react'
+import priceFormmater from '../../utilities/priceFormmater'
 
 export function CartList ({ cart, removeItem, total }) {
   return (
@@ -12,7 +13,7 @@ export function CartList ({ cart, removeItem, total }) {
         <HStack fontWeight='semibold' justify='flex-end'>
           <Text>Total $</Text>
           <Text color='main.500' fontSize='2xl'>
-            {total}
+            {priceFormmater.format(total)}
           </Text>
         </HStack>
       </VStack>
