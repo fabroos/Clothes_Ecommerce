@@ -7,10 +7,7 @@ import {
   Heading,
   HStack,
   Image,
-  Radio,
-  RadioGroup,
   Skeleton,
-  Stack,
   Text,
   VStack
 } from '@chakra-ui/react'
@@ -18,24 +15,7 @@ import { Link } from 'react-router-dom'
 import { useAsync } from '../../hooks/useAsync'
 import { getNotices } from '../../services/getNotices'
 import { adaptCategories } from '../../adapters/adaptCategories'
-
-function RadioSelection ({ elements, value, setValue }) {
-  return (
-    <RadioGroup onChange={setValue} value={value}>
-      <Stack direction='row'>
-        {elements &&
-          elements.map(element => (
-            <Radio
-              colorScheme='main'
-              value={element?.id}
-              key={element?.id}
-              name='noticeRadio'
-            />
-          ))}
-      </Stack>
-    </RadioGroup>
-  )
-}
+import { RadioSelection } from '../RadioSelection/RadioSelection'
 
 export function SliderImg () {
   const [value, setValue] = useState(null)
@@ -45,7 +25,7 @@ export function SliderImg () {
     if (!value) setValue(notice[0]?.id)
     if (notice) setCurrent(notice.find(n => n.id === value))
   }, [value, notice])
-
+  console.log(current)
   return (
     <>
       {loading && (
