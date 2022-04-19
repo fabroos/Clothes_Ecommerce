@@ -30,18 +30,30 @@ export function Footer () {
               </Heading>
               <List fontWeight='semibold' color='gray.100'>
                 <ListItem _hover={{ color: 'gray.400' }}>
-                  <Text as={'a'} href='https://instagram'>
+                  <a
+                    target='_BLANK'
+                    href='https://github.com/fabroos'
+                    rel='noreferrer'
+                  >
+                    github
+                  </a>
+                </ListItem>
+                <ListItem _hover={{ color: 'gray.400' }}>
+                  <a
+                    target='_BLANK'
+                    href='https://www.linkedin.com/in/signorettafabrizio'
+                    rel='noreferrer'
+                  >
+                    Linkedin
+                  </a>
+                </ListItem>
+                <ListItem _hover={{ color: 'gray.400' }}>
+                  <Text
+                    as={'a'}
+                    href='https://instagram.com/fabrii_signoretta'
+                    target='_blank'
+                  >
                     Instagram
-                  </Text>
-                </ListItem>
-                <ListItem _hover={{ color: 'gray.400' }}>
-                  <Text as={'a'} href='https://instagram'>
-                    Facebook
-                  </Text>
-                </ListItem>
-                <ListItem _hover={{ color: 'gray.400' }}>
-                  <Text as={'a'} href='https://instagram'>
-                    Whatsapp
                   </Text>
                 </ListItem>
               </List>
