@@ -7,10 +7,10 @@ export function ProductsListText ({ categoria, search, tematica }) {
       {categoria
         ? `productos tipo ${categoria}`
         : search
-        ? `resultados para ${search}`
-        : tematica
-        ? `productos de ${tematica}`
-        : 'Todos los productos'}
+          ? `resultados para ${search}`
+          : tematica
+            ? `productos de ${tematica}`
+            : 'Todos los productos'}
     </Text>
   )
 }

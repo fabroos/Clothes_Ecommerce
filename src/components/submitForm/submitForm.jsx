@@ -29,7 +29,6 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
     ciudad: ''
   })
 
-  console.log('rerender')
   function handleChange (e) {
     setError(false)
     const newInfo = { ...userInfo }
@@ -39,7 +38,7 @@ export function SubmitForm ({ cart, totalPrice, clear, setId, setLoading }) {
   function handleSubmit (e) {
     e.preventDefault()
     Object.keys(userInfo).forEach(info => {
-      // verificar que todos los campos esten correctos
+      // verificar que todos los campos esten completos
       if (userInfo[info] === '') {
         return setError(true)
       }
