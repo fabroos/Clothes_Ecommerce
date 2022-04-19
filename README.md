@@ -19,13 +19,8 @@ Tecnologias
 - [vercel](https://vercel.com/)
 - [Git](https://git-scm.com/)
 - [firebase](https://firebase.google.com/)
-
----
-
-librerías
-
 - [Chakra](https://chakra-ui.com/)
-- [React-router](https://reacttraining.com/react-router/)
+- [React-router](https://reactrouter.com/)
 - [axios](https://github.com/axios/axios)
 
 ## Calificación 🌟
@@ -33,3 +28,7 @@ librerías
 | Calificación | ? / 10 |
 | :----------: | :----: |
 
+
+## Agradecimientos 🙏
+
+Muchas gracias a todo el equipo de coderhouse, a mi profesor Federico Osandon por explicarme todo lo que debo aprender y a mi tutora Laura Therisod por siempre aconsejarme sobre todo lo que necesito para poder hacer un proyecto de manera satisfactoria.

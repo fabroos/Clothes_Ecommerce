@@ -6,7 +6,7 @@ import {
 } from 'firebase/firestore'
 import { app } from '../firebase/config'
 
-// Add a new document in collection "cities"
+// Add a new document in collection "orders"
 export function setOrder (order) {
   const db = getFirestore(app)
   return addDoc(collection(db, 'orders'), {
