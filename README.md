@@ -6,9 +6,9 @@ Himitsu es un proyecto realizado principalmente en React y Chakra, para mi curso
 
 ## [![coderhouse logo](https://www.greatplacetowork.com.ar/images/coderhouse-logo.png)](https://www.coderhouse.com)
 
-Link a la [Demo](https://himitsu-store.netlify.app/)
+Link a la [Demo](https://himitsu-store.vercel.app/)
 
-[![Demo Png](https://i.imgur.com/aaymIqV.png)](htttp://himitsu-store.netlify.app/)
+[![Demo Png](https://i.imgur.com/aaymIqV.png)](https://himitsu-store.vercel.app/)
 
 ## Tecnologías utilizadas 🚀
 
@@ -30,4 +30,6 @@ librerías
 
 ## Calificación 🌟
 
-**? / 10**
+| Calificación | ? / 10 |
+| :----------: | :----: |
+
