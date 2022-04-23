@@ -5,7 +5,7 @@ import { initializeApp } from 'firebase/app'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDqk52mXP62MHQQoLjSzT8WccHFLOUBeio',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: 'fabroos-ecommerce.firebaseapp.com',
   projectId: 'fabroos-ecommerce',
   storageBucket: 'fabroos-ecommerce.appspot.com',

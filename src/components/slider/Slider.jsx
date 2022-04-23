@@ -25,7 +25,6 @@ export function SliderImg () {
     if (!value) setValue(notice[0]?.id)
     if (notice) setCurrent(notice.find(n => n.id === value))
   }, [value, notice])
-  console.log(current)
   return (
     <>
       {loading && (
