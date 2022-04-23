@@ -25,7 +25,7 @@ Tecnologias
 
 ## Calificación 🌟
 
-| Calificación | ? / 10 |
+| Calificación | 9 / 10 |
 | :----------: | :----: |
 
 
