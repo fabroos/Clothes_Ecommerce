@@ -15,7 +15,7 @@ import { Count } from '../Count/Count'
 
 export function ProductRelevantInfo ({
   title,
-  tematic,
+  tematica,
   stock,
   price,
   handleAdd,
@@ -26,7 +26,7 @@ export function ProductRelevantInfo ({
     <VStack justify='flex-start' flex='1' align='start'>
       <Heading>{title}</Heading>
       <HStack spacing={3}>
-        <Link to={`/tematica/${tematic}`}>
+        <Link to={`/tematica/${tematica}`}>
           <Badge
             colorScheme='gray'
             transitionDuration='.15s'
@@ -35,7 +35,7 @@ export function ProductRelevantInfo ({
               color: 'white'
             }}
           >
-            {tematic}
+            {tematica}
           </Badge>
         </Link>
         {stock < 4 && <Badge colorScheme='yellow'>Ultimas unidades</Badge>}
